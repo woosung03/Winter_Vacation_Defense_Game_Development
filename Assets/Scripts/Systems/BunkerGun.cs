@@ -16,6 +16,13 @@ namespace Systems
 
         private float timer;
 
+        public void ApplyUpgrade(float fireIntervalMul, int damageAdd, float rangeAdd)
+        {
+            fireInterval = Mathf.Max(0.05f, fireInterval * fireIntervalMul);
+            bulletDamage = Mathf.Max(1, bulletDamage + damageAdd);
+            range = Mathf.Max(0.5f, range + rangeAdd);
+        }
+
         private void Update()
         {
             if (bulletPrefab == null) return;
