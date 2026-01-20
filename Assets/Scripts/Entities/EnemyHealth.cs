@@ -1,30 +1,39 @@
 using UnityEngine;
+using Systems;
 
 namespace Entities
 {
     public class EnemyHealth : MonoBehaviour
     {
-        [SerializeField] private int maxHealth = 30;
-        public int CurrentHealth { get; private set; }
+        [SerializeField] private int maxHP = 10;
+        [SerializeField] private int goldReward = 10;
+
+        private int currentHP;
+        private UpgradeManager upgradeManager;
 
         private void Awake()
         {
-            CurrentHealth = maxHealth;
+            currentHP = maxHP;
+            upgradeManager = FindObjectOfType<UpgradeManager>();
         }
 
-        public void TakeDamage(int amount)
+        public void TakeDamage(int damage)
         {
-            if (amount <= 0) return;
+            currentHP -= damage;
 
-            CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
-
-            if (CurrentHealth <= 0)
+            if (currentHP <= 0)
+            {
                 Die();
+            }
         }
 
         private void Die()
         {
-            // TODO: 이펙트/점수/드롭 처리
+            if (upgradeManager != null)
+            {
+                upgradeManager.AddGold(goldReward);
+            }
+
             Destroy(gameObject);
         }
     }
