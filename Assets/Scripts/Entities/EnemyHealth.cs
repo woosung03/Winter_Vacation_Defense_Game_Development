@@ -7,6 +7,8 @@ namespace Entities
     {
         [SerializeField] private int maxHP = 10;
         [SerializeField] private int goldReward = 10;
+        [SerializeField] private float metaDropChance = 0.05f; // 5%
+        [SerializeField] private int metaReward = 1;
 
         private int currentHP;
         private UpgradeManager upgradeManager;
@@ -14,7 +16,7 @@ namespace Entities
         private void Awake()
         {
             currentHP = maxHP;
-            upgradeManager = FindObjectOfType<UpgradeManager>();
+            upgradeManager = FindAnyObjectByType<UpgradeManager>();
         }
 
         public void TakeDamage(int damage)
@@ -29,9 +31,11 @@ namespace Entities
 
         private void Die()
         {
-            if (upgradeManager != null)
+            upgradeManager?.AddGold(goldReward);
+
+            if (Random.value < metaDropChance)
             {
-                upgradeManager.AddGold(goldReward);
+                MetaCurrencyManager.Instance.Add(metaReward);
             }
 
             Destroy(gameObject);

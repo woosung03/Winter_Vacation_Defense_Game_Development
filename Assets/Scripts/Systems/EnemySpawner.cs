@@ -1,17 +1,21 @@
 using UnityEngine;
+using Entities;
 
 namespace Systems
 {
+    [System.Serializable]
+    public class EnemyEntry
+    {
+        public EnemyType type;
+        public GameObject prefab;
+    }
+
     public class EnemySpawner : MonoBehaviour
     {
-        [Header("Prefab")]
-        [SerializeField] private GameObject enemyPrefab;
-
-        [Header("Spawn")]
-        [SerializeField] private float spawnInterval = 1.5f;
+        [SerializeField] private EnemyEntry[] enemyEntries;
+        [SerializeField] private GameObject defaultEnemyPrefab;
         [SerializeField] private float extraRadius = 2.0f; // 화면 밖으로 얼마나 더 바깥에서 스폰할지
 
-        private float timer;
         private Camera cam;
 
         private void Awake()
@@ -19,21 +23,42 @@ namespace Systems
             cam = Camera.main;
         }
 
-        private void Update()
+        public void SpawnEnemy(EnemyType type)
         {
-            if (enemyPrefab == null || cam == null) return;
+            if (enemyEntries == null || enemyEntries.Length == 0) return;
+            if (cam == null) cam = Camera.main;
 
-            timer += Time.deltaTime;
-            if (timer >= spawnInterval)
+            foreach (var entry in enemyEntries)
             {
-                timer = 0f;
-                Spawn();
+                if (entry != null && entry.type == type && entry.prefab != null)
+                {
+                    Instantiate(entry.prefab, GetSpawnPosition(), Quaternion.identity);
+                    return;
+                }
             }
         }
 
-        private void Spawn()
+        // 웨이브 번호에 따라 적 타입을 순차/스케일링 스폰
+        public void SpawnScaledEnemy(int wave)
         {
-            // 카메라 기준 화면 반지름 계산 (Orthographic 카메라 기준)
+            if (cam == null) cam = Camera.main;
+
+            if (defaultEnemyPrefab == null) return;
+
+            GameObject enemy = Instantiate(defaultEnemyPrefab, GetSpawnPosition(), Quaternion.identity);
+
+            EnemyStats stats = enemy.GetComponent<EnemyStats>();
+            if (stats != null)
+            {
+                stats.ApplyWaveScaling(wave);
+            }
+        }
+
+        private Vector3 GetSpawnPosition()
+        {
+            if (cam == null) return transform.position;
+
+            // 기존 원형 스폰 로직 그대로 (Orthographic 카메라 기준)
             float height = cam.orthographicSize;
             float width = height * cam.aspect;
             float radius = Mathf.Sqrt(width * width + height * height) + extraRadius;
@@ -42,7 +67,8 @@ namespace Systems
             Vector2 center = cam.transform.position;
             Vector2 pos = center + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
 
-            Instantiate(enemyPrefab, pos, Quaternion.identity);
+            return pos;
         }
+
     }
 }
