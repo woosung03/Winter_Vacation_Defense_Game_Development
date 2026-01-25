@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9781b17ca221c7d40b54f89872e2eb4e, type: 3}
+  m_Name: WaveConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Systems.WaveConfig
+  baseEnemyCount: 5
+  baseSpawnInterval: 1.2
+  countGrowthPerWave: 2
+  intervalReductionPerWave: 0.03
+  minInterval: 0.3
+  hpGrowthPerWave: 0.25
+  speedGrowthPerWave: 0.05
+  tankEnemyChance: 0.2
+  fastEnemyChance: 0.3

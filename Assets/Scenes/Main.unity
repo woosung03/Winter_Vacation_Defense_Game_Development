@@ -256,6 +256,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173079697}
   m_CullTransparentMesh: 1
+--- !u!1 &186733984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 186733986}
+  - component: {fileID: 186733985}
+  m_Layer: 0
+  m_Name: WaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &186733985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186733984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4229616419e6ae542968fa139a884324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Systems.WaveManager
+  spawner: {fileID: 1212847359}
+  waveText: {fileID: 0}
+  baseEnemyCount: 5
+  baseSpawnInterval: 1.2
+--- !u!4 &186733986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186733984}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.04741, y: -0.00138, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &194194339
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UI.BunkerHealthUI
   bunkerHealth: {fileID: 0}
   hpSlider: {fileID: 0}
-  hpText: {fileID: 0}
+  hpText: {fileID: 173079699}
 --- !u!114 &267106581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1633,8 +1681,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9935493a756118469ef6ee777b3f1c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Systems.EnemySpawner
-  enemyPrefab: {fileID: 3734996035353051099, guid: cdb2a075e758eb849bb45e1f6256220b, type: 3}
-  spawnInterval: 1.5
+  enemyEntries:
+  - type: 0
+    prefab: {fileID: 3734996035353051099, guid: cdb2a075e758eb849bb45e1f6256220b, type: 3}
+  - type: 1
+    prefab: {fileID: 3734996035353051099, guid: cdb2a075e758eb849bb45e1f6256220b, type: 3}
+  - type: 2
+    prefab: {fileID: 3734996035353051099, guid: cdb2a075e758eb849bb45e1f6256220b, type: 3}
+  defaultEnemyPrefab: {fileID: 0}
   extraRadius: 2
 --- !u!4 &1212847360
 Transform:
@@ -2334,3 +2388,4 @@ SceneRoots:
   - {fileID: 1185939131}
   - {fileID: 1677830046}
   - {fileID: 423228000}
+  - {fileID: 186733986}

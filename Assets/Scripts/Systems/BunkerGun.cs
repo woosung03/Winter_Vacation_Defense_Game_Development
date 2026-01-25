@@ -14,6 +14,8 @@ namespace Systems
         [SerializeField] private int bulletDamage = 10;
         [SerializeField] private float range = 10f;
 
+        public float Range => range;
+
         private float timer;
 
         public void ApplyUpgrade(float fireIntervalMul, int damageAdd, float rangeAdd)

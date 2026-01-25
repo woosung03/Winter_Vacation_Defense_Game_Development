@@ -29,6 +29,12 @@ namespace Entities
             }
         }
 
+        public void SetMaxHP(int value)
+        {
+            maxHP = value;
+            currentHP = maxHP;
+        }
+
         private void Die()
         {
             upgradeManager?.AddGold(goldReward);

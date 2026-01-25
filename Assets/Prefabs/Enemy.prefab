@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4223018713691374465}
   - component: {fileID: 4961506807535521535}
   - component: {fileID: 4963115156405116051}
+  - component: {fileID: -4570322616146210788}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -180,7 +181,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55728224decae43438c12f55c056856c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.EnemyHealth
-  maxHealth: 30
+  maxHP: 10
+  goldReward: 10
+  metaDropChance: 0.05
+  metaReward: 1
 --- !u!114 &4963115156405116051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,3 +199,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Enemy
   moveSpeed: 2.5
   contactDamage: 10
+--- !u!114 &-4570322616146210788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3734996035353051099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be68df01e52cfd4e94729bc36d4f601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.EnemyMovement
+  moveSpeed: 1.5

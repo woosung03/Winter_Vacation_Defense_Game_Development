@@ -41,16 +41,36 @@ namespace Systems
         // 웨이브 번호에 따라 적 타입을 순차/스케일링 스폰
         public void SpawnScaledEnemy(int wave)
         {
+            SpawnScaledEnemy(wave, 0.25f, 0.05f, EnemyType.Normal);
+        }
+
+        public void SpawnScaledEnemy(int wave, float hpGrowthPerWave, float speedGrowthPerWave, EnemyType type)
+        {
             if (cam == null) cam = Camera.main;
 
-            if (defaultEnemyPrefab == null) return;
+            GameObject enemyPrefab = defaultEnemyPrefab;
 
-            GameObject enemy = Instantiate(defaultEnemyPrefab, GetSpawnPosition(), Quaternion.identity);
+            // 타입에 맞는 프리팹 찾기
+            if (enemyEntries != null && enemyEntries.Length > 0)
+            {
+                foreach (var entry in enemyEntries)
+                {
+                    if (entry != null && entry.type == type && entry.prefab != null)
+                    {
+                        enemyPrefab = entry.prefab;
+                        break;
+                    }
+                }
+            }
+
+            if (enemyPrefab == null) return;
+
+            GameObject enemy = Instantiate(enemyPrefab, GetSpawnPosition(), Quaternion.identity);
 
             EnemyStats stats = enemy.GetComponent<EnemyStats>();
             if (stats != null)
             {
-                stats.ApplyWaveScaling(wave);
+                stats.ApplyWaveScaling(wave, hpGrowthPerWave, speedGrowthPerWave);
             }
         }
 
