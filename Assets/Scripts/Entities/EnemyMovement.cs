@@ -9,7 +9,7 @@ namespace Entities
 
         private void Start()
         {
-            // 벙커(또는 타겟) 태그를 "Bunker"로 사용한다고 가정
+            // 벙커(또는 타겟) 태그를 "Bunker"로 사용
             GameObject bunker = GameObject.FindGameObjectWithTag("Bunker");
             if (bunker != null) target = bunker.transform;
         }

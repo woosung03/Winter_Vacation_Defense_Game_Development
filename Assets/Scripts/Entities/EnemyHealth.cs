@@ -7,7 +7,7 @@ namespace Entities
     {
         [SerializeField] private int maxHP = 10;
         [SerializeField] private int goldReward = 10;
-        [SerializeField] private float metaDropChance = 0.05f; // 5%
+        [SerializeField] private float metaDropChance = 0.05f; // 5% È®·ü
         [SerializeField] private int metaReward = 1;
 
         private int currentHP;
